@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<!-- Angular -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	
+	<script src="Poke.js"></script>
+	<link rel="stylesheet" type="text/css" href="Battle.css">
+	
+
+</head>
+<body ng-app="myApp" ng-controller="fightCtrl"  ng-keydown="key($event)">
+	<ul class="nav nav-tabs">
+	  <li role="presentation"><a href="Poke.html">Home</a></li>
+	  <li role="presentation"><a href="Pokedex.html">Pokedex</a></li>
+	  <li role="presentation" class="active"><a href="Battle.html">Battle</a></li>
+	</ul>
+	<h1>FIGHT!</h1>
+	<h5>{{url}}</h5>
+	<div id="arena">
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-3">Multres</div>
+			<div class="col-md-3"></div>
+			<div class="col-md-3"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-2"></div>
+			<div class="col-md-2"></div>
+			<div class="col-md-2"></div>
+			<div class="col-md-2"><img id="fighter" src={{pokemon2.image}}></div>
+			<div class="col-md-2"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-3"><img id="fighter" src={{pokemon1.image}}></div>
+			<div class="col-md-3"></div>
+			<div class="col-md-3">Zapdos</div>
+		</div>
+		<div class="row">
+			<div id="leftMenu" class="col-md-6">What will zapdos do?</div>
+			<div id="battleMenu" class="col-md-6">
+				<div class="row">
+					<div ng-show="fight" id="moves" class="col-md-6">&#x25B6; Fight</div>
+					<div ng-hide="fight" id="moves" class="col-md-6">Fight</div>
+					<div ng-show="bag" id="moves" class="col-md-6">&#x25B6; Bag</div>
+					<div ng-hide="bag" id="moves" class="col-md-6">Bag</div>
+				</div>
+				<div class="row">
+					<div ng-show="pokemon" id="moves" class="col-md-6">&#x25B6; Pokemon</div>
+					<div ng-hide="pokemon" id="moves" class="col-md-6">Pokemon</div>
+					<div ng-show="run" id="moves" class="col-md-6">&#x25B6; Run</div>
+					<div ng-hide="run" id="moves" class="col-md-6">Run</div>
+				</div>
+			</div>
+		</div>
+		
+		
+	</div>
+
+</body>

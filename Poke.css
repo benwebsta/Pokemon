@@ -1,0 +1,23 @@
+table {
+	border-collapse: collapse;
+}
+
+table, th, td {
+	border: 1px solid black;
+	width: 100%;
+	padding: 15px;
+}
+.pokemonpicker, .jumbotron h1, p{
+	text-align: center;
+}
+td{
+	height: 50px;
+	vertical-align: center;
+	text-align: center;
+	font-weight: bold;
+}
+th{
+	font-size: 200%;
+	font-weight: bold;
+	text-align: center;
+}

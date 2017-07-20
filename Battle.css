@@ -1,0 +1,112 @@
+h1{
+	text-align: center;
+	padding-bottom: 30px;
+	font-weight: bold;
+	font-size: 400%;
+	text-color: white;
+}
+li a{
+	color: white;
+}
+#selectionBox{
+	height: 1300px;
+	width: 1100px;
+    border: 2px solid white;
+    padding: 25px;
+    margin: 25px;
+	background-color: white;
+	position: absolute;
+	margin: auto;
+	right: 0;
+	left: 0;
+	padding-right: 75px;
+	background-color: gray;
+}
+.playerSelect{
+	text-align: center;
+	width: 175px;
+	text-decoration: underline;
+	border: 2px solid black;
+}
+.player2Select{
+	float: right;
+}
+.player1Select{
+	float: left;
+}
+.selection{
+	padding-left: 30px;
+	padding-right: 30px;
+}
+.blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {  
+  50% { opacity: 0; }
+}
+.subP1{
+	padding-left: 65px;
+}
+.subP2{
+	padding-left: 265px;
+}
+body{
+	background-color: gray;
+}
+.fightButton{
+}
+#Fight{
+	color: white;
+}
+#fighter{
+	width: 150px;
+	height: 150px;
+}
+#arena{
+	height: 500px;
+	width: 800px;
+    border: 2px solid gray;
+    padding: 25px;
+    margin: 25px;
+	background-color: white;
+	position: absolute;
+	margin: auto;
+	right: 0;
+	left: 0;
+	background-color: white;
+}
+#battleMenu{
+	height: 130px;
+	border-width: 5px;
+	border-style: double;
+	border-radius: 10px;
+	box-shadow: 0 0 0 1px black, 0 0 0 10px white;
+	font-family: pokemon;
+	font-size: 125%;
+	font-weight: bold;
+	line-height: 130px;
+	padding-left: 20px
+}
+#moves{
+	height: 65px;
+	display: inline-block;
+	vertical-align: middle;
+	text-align: left;
+	line-height: 50px;
+}
+@font-face{
+	font-family: pokemon;
+	src: url(PokemonGB.ttf);
+}
+#leftMenu{
+	height: 130px;
+	border-width: 5px;
+	border-style: double;
+	border-radius: 10px;
+	box-shadow: 0 0 0 1px black, 0 0 0 10px white;
+	font-family: pokemon;
+	font-size: 125%;
+	font-weight: bold;
+	line-height: 50px;
+}

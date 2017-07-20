@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<!-- Angular -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	
+	<script src="Poke.js"></script>
+	<link rel="stylesheet" type="text/css" href="Poke.css">
+	
+
+</head>
+<body ng-app="myApp" ng-controller="pokedexCtrl">
+	<ul class="nav nav-tabs">
+	  <li role="presentation"><a href="Poke.html">Home</a></li>
+	  <li role="presentation" class="active"><a href="Pokedex.html">Pokedex</a></li>
+	  <li role="presentation"><a href="Battle.html">Battle</a></li>
+	</ul>
+	
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Weight</th>
+			<th>Number</th>
+			<th>Image</th>
+			<th>shiny image</th>
+		</tr>
+		<tr ng-repeat="pokemon in listOfPokemon">
+			<td style="font-size: 150%;">{{pokemon.name}}</td>
+			<td>{{pokemon.weight}} lbs</td>
+			<td>{{pokemon.num}}</td>
+			<td><img src={{pokemon.image}}></td>
+			<td><img src={{pokemon.sImage}}></td>
+
+		</tr>
+	</table>
+</body>
