@@ -244,7 +244,8 @@ app.controller("fightCtrl", function($http, $scope){
 			$scope.pokemon1 = {
 				name: response.data.name.charAt(0).toUpperCase() + response.data.name.substring(1),
 				num: response.data.id,
-				image: response.data.sprites.back_default
+				imageFront: response.data.sprites.front_default,
+				imageBack: response.data.sprites.back_default
 			}
 		}, function errorCallback(response) {
 			console.log(response.data);
@@ -256,22 +257,44 @@ app.controller("fightCtrl", function($http, $scope){
 			$scope.pokemon2 = {
 				name: response.data.name.charAt(0).toUpperCase() + response.data.name.substring(1),
 				num: response.data.id,
-				image: response.data.sprites.front_default
+				imageFront: response.data.sprites.front_default,
+				imageBack: response.data.sprites.back_default
 			}
 		}, function errorCallback(response) {
 			console.log(response.data);
 		  }); 
+	
 	var position = 1; 
 	$scope.fight = true;
 	$scope.bag = false;
-	$scope.pokemon = false;
+	$scope.mon = false;
 	$scope.run = false;
+		  
+	var position2 = 1; 
+	$scope.fight2 = true;
+	$scope.bag2 = false;
+	$scope.mon2 = false;
+	$scope.run2 = false;
+
 	$scope.key = function($event){
 		console.log($event.keyCode);
 		if ($event.keyCode == 38){
-			//up
+			//up2(up arrow)
+			if(position2 == 3){
+				$scope.mon2 = false;
+				$scope.fight2 = true;
+				position2 = 1;
+			}
+			else if(position2 == 4){
+				$scope.run2 = false;
+				$scope.bag2 = true;
+				position2 = 2;
+			}
+		}
+		else if ($event.keyCode == 87){
+			//up1(w)
 			if(position == 3){
-				$scope.pokemon = false;
+				$scope.mon = false;
 				$scope.fight = true;
 				position = 1;
 			}
@@ -282,33 +305,72 @@ app.controller("fightCtrl", function($http, $scope){
 			}
 		}
 		else if ($event.keyCode == 39){
-			//right
+			//right2(right arrow)
+			if(position2 == 1){
+				$scope.fight2 = false;
+				$scope.bag2 = true;
+				position2 = 2;
+			}
+			else if(position2 == 3){
+				$scope.mon2 = false;
+				$scope.run2 = true;
+				position2 = 4;
+			}
+		}
+		else if ($event.keyCode == 68){
+			//right1 (d)
 			if(position == 1){
 				$scope.fight = false;
 				$scope.bag = true;
 				position = 2;
 			}
 			else if(position == 3){
-				$scope.pokemon = false;
+				$scope.mon = false;
 				$scope.run = true;
 				position = 4;
 			}
 		}
 		else if ($event.keyCode == 40){
-			//down
+			//down1 (down arrow)
+			if(position2 == 2){
+				$scope.bag2 = false;
+				$scope.run2 = true;
+				position2 = 4;
+			}
+			else if(position2 == 1){
+				$scope.fight2 = false;
+				$scope.mon2 = true;
+				position2 = 3;
+			}
+		}
+		else if ($event.keyCode == 83){
+			//down1 (s)
 			if(position == 2){
 				$scope.bag = false;
-				$scope. run = true;
+				$scope.run = true;
 				position = 4;
 			}
 			else if(position == 1){
 				$scope.fight = false;
-				$scope.pokemon = true;
+				$scope.mon = true;
 				position = 3;
 			}
 		}
 		else if ($event.keyCode == 37){
-			//left
+			//left2 (left arrow)
+			if(position2 == 2){
+				$scope.bag2 = false;
+				$scope.fight2 = true;
+				position2 = 1;
+			}
+			else if(position2 == 4){
+				$scope.run2 = false;
+				$scope.mon2 = true;
+				position2 = 3;
+			}
+		}
+		else if ($event.keyCode == 65){
+			//left1 (a)
 			if(position == 2){
 				$scope.bag = false;
 				$scope.fight = true;
@@ -316,7 +378,7 @@ app.controller("fightCtrl", function($http, $scope){
 			}
 			else if(position == 4){
 				$scope.run = false;
-				$scope.pokemon = true;
+				$scope.mon = true;
 				position = 3;
 			}
 		}

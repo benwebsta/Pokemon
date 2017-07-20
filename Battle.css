@@ -53,6 +53,7 @@ li a{
 }
 body{
 	background-color: gray;
+	overflow: hidden;
 }
 .fightButton{
 }
@@ -65,7 +66,7 @@ body{
 }
 #arena{
 	height: 500px;
-	width: 800px;
+	width: 700px;
     border: 2px solid gray;
     padding: 25px;
     margin: 25px;
