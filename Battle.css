@@ -148,7 +148,12 @@ progress::-webkit-progress-bar-value{
     -webkit-appearance: progress-bar;
 	background-color: green;
 }	
-
+.controls {
+	padding-top: 490px;
+	padding-left: 50px;
+	font-size: 200%;
+	color: white;
+}
 
 
 
