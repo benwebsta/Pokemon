@@ -34,8 +34,30 @@
 			<div id="arena">
 				<div class="row">
 					<div class="col-md-2"></div>
+					<div class="col-md-2">
+						<div class="row">
+							<button ng-click="disabled" type="button" class="btn btn-danger btn-lg hideBtn">FIGHT</button>
+						</div>
+						<div class="row">
+							<div id="name2" class="row">
+								{{pokemon2.name}}
+							</div>
+							<div class="row hpBar">
+								<div class="row hp">
+								<div class="col-md-2">
+									HP: 
+								</div>
+								<div class="col-md-10">
+									<progress id="hpMeter" value="200" max="200" class="healthMeter">
+									
+									</progress>
+								</div>
+								</div>
+								<div id="hpNumber" class="row hpNumber">200/200</div>
+							</div>
+						</div>
+					</div>
 					<div class="col-md-2"></div>
-					<div id="name1" class="col-md-2">{{pokemon2.name}}</div>
 					<div class="col-md-2"></div>
 					<div class="col-md-2"><img id="fighter" src={{pokemon2.imageFront}}></div>
 					<div class="col-md-2"></div>
@@ -50,7 +72,7 @@
 							<button ng-click="disabled" type="button" class="btn btn-danger btn-lg hideBtn">FIGHT</button>
 						</div>
 						<div class="row">
-							<div id="name2" class="row">
+							<div id="name1" class="row">
 								{{pokemon1.name}}
 							</div>
 							<div class="row hpBar">
@@ -59,12 +81,12 @@
 									HP: 
 								</div>
 								<div class="col-md-10">
-									<progress id="hpMeter" value="100" max="100" class="healthMeter">
+									<progress id="hpMeter" value="200" max="200" class="healthMeter">
 									
 									</progress>
 								</div>
 								</div>
-								<div id="hpNumber" class="row hpNumber">300/300</div>
+								<div id="hpNumber" class="row hpNumber">200/200</div>
 							</div>
 						</div>
 					</div>
@@ -93,8 +115,30 @@
 			<div id="arena">
 				<div class="row">
 					<div class="col-md-2"></div>
+					<div class="col-md-2">
+						<div class="row">
+							<button ng-click="disabled" type="button" class="btn btn-danger btn-lg hideBtn">FIGHT</button>
+						</div>
+						<div class="row">
+							<div id="name1" class="row">
+								{{pokemon1.name}}
+							</div>
+							<div class="row hpBar">
+								<div class="row hp">
+								<div class="col-md-2">
+									HP: 
+								</div>
+								<div class="col-md-10">
+									<progress id="hpMeter" value="200" max="200" class="healthMeter">
+									
+									</progress>
+								</div>
+								</div>
+								<div id="hpNumber" class="row hpNumber">200/200</div>
+							</div>
+						</div>
+					</div>
 					<div class="col-md-2"></div>
-					<div id="name1" class="col-md-2">{{pokemon1.name}}</div>
 					<div class="col-md-2"></div>
 					<div class="col-md-2"><img id="fighter" src={{pokemon1.imageFront}}></div>
 					<div class="col-md-2"></div>
@@ -118,12 +162,12 @@
 									HP: 
 								</div>
 								<div class="col-md-10">
-									<progress id="hpMeter" value="100" max="100" class="healthMeter">
+									<progress id="hpMeter" value="200" max="200" class="healthMeter">
 									
 									</progress>
 								</div>
 								</div>
-								<div id="hpNumber" class="row hpNumber">150/150</div>
+								<div id="hpNumber" class="row hpNumber">200/200</div>
 							</div>
 						</div>
 					</div>
