@@ -48,12 +48,12 @@
 									HP: 
 								</div>
 								<div class="col-md-10">
-									<progress id="hpMeter" value="200" max="200" class="healthMeter">
+									<progress id="hpMeter" value="{{mon2CurrHp}}" max="{{mon2MaxHp}}" class="healthMeter">
 									
 									</progress>
 								</div>
 								</div>
-								<div id="hpNumber" class="row hpNumber">200/200</div>
+								<div id="hpNumber" class="row hpNumber">{{mon2CurrHp}}/{{mon2MaxHp}}</div>
 							</div>
 						</div>
 					</div>
@@ -81,20 +81,20 @@
 									HP: 
 								</div>
 								<div class="col-md-10">
-									<progress id="hpMeter" value="200" max="200" class="healthMeter">
+									<progress id="hpMeter" value="{{mon1CurrHp}}" max="{{mon1MaxHp}}" class="healthMeter">
 									
 									</progress>
 								</div>
 								</div>
-								<div id="hpNumber" class="row hpNumber">200/200</div>
+								<div id="hpNumber" class="row hpNumber">{{mon1CurrHp}}/{{mon1MaxHp}}</div>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-2"></div>
 				</div>
 				<div class="row">
-					<div id="leftMenu" class="col-md-6">What will {{pokemon1.name}} do?</div>
-					<div id="battleMenu" class="col-md-6">
+					<div id="leftMenu" class="col-md-6">{{message1}}</div>
+					<!--<div id="battleMenu" class="col-md-6">
 						<div class="row">
 							<div ng-show="fight" id="moves" class="col-md-6">&#x25B6; Fight</div>
 							<div ng-hide="fight" id="moves" class="col-md-6">Fight</div>
@@ -106,6 +106,16 @@
 							<div ng-hide="mon" id="moves" class="col-md-6">Mons</div>
 							<div ng-show="run" id="moves" class="col-md-6">&#x25B6; Run</div>
 							<div ng-hide="run" id="moves" class="col-md-6">Run</div>
+						</div>
+					</div>-->
+					<div id="battleMenu" class="col-md-6">
+						<div class="row">
+							<div id="moves" class="col-md-6">(a)Stab</div>
+							<div id="moves" class="col-md-6">(w)Heal</div>
+						</div>
+						<div class="row">
+							<div id="moves" class="col-md-6">(s)Perry</div>
+							<div id="moves" class="col-md-6">(d)Slam</div>
 						</div>
 					</div>
 				</div>
@@ -129,12 +139,12 @@
 									HP: 
 								</div>
 								<div class="col-md-10">
-									<progress id="hpMeter" value="200" max="200" class="healthMeter">
+									<progress id="hpMeter" value="{{mon1CurrHp}}" max="{{mon1MaxHp}}" class="healthMeter">
 									
 									</progress>
 								</div>
 								</div>
-								<div id="hpNumber" class="row hpNumber">200/200</div>
+								<div id="hpNumber" class="row hpNumber">{{mon1CurrHp}}/{{mon1MaxHp}}</div>
 							</div>
 						</div>
 					</div>
@@ -162,20 +172,20 @@
 									HP: 
 								</div>
 								<div class="col-md-10">
-									<progress id="hpMeter" value="200" max="200" class="healthMeter">
+									<progress id="hpMeter" value="{{mon2CurrHp}}" max="{{mon2MaxHp}}" class="healthMeter">
 									
 									</progress>
 								</div>
 								</div>
-								<div id="hpNumber" class="row hpNumber">200/200</div>
+								<div id="hpNumber" class="row hpNumber">{{mon2CurrHp}}/{{mon2MaxHp}}</div>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-2"></div>
 				</div>
 				<div class="row">
-					<div id="leftMenu" class="col-md-6">What will {{pokemon2.name}} do?</div>
-					<div id="battleMenu" class="col-md-6">
+					<div id="leftMenu" class="col-md-6">{{message2}}</div>
+					<!--<div id="battleMenu" class="col-md-6">
 						<div class="row">
 							<div ng-show="fight2" id="moves" class="col-md-6">&#x25B6; Fight</div>
 							<div ng-hide="fight2" id="moves" class="col-md-6">Fight</div>
@@ -187,6 +197,16 @@
 							<div ng-hide="mon2" id="moves" class="col-md-6">Mons</div>
 							<div ng-show="run2" id="moves" class="col-md-6">&#x25B6; Run</div>
 							<div ng-hide="run2" id="moves" class="col-md-6">Run</div>
+						</div>
+					</div>-->
+					<div id="battleMenu" class="col-md-6">
+						<div class="row">
+							<div id="moves" class="col-md-6">(&#8592;)Stab</div>
+							<div id="moves" class="col-md-6">(&#8593;)Heal</div>
+						</div>
+						<div class="row">
+							<div id="moves" class="col-md-6">(&#8595;)Perry</div>
+							<div id="moves" class="col-md-6">(&#8594;)Slam</div>
 						</div>
 					</div>
 				</div>

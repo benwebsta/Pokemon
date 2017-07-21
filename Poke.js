@@ -245,9 +245,9 @@ app.controller("fightCtrl", function($http, $scope){
 				name: response.data.name.charAt(0).toUpperCase() + response.data.name.substring(1),
 				num: response.data.id,
 				imageFront: response.data.sprites.front_default,
-				imageBack: response.data.sprites.back_default,
-				health: 200
+				imageBack: response.data.sprites.back_default
 			}
+			$scope.message1 = "What will " + $scope.pokemon1.name + " do?";
 		}, function errorCallback(response) {
 			console.log(response.data);
 		  });
@@ -259,9 +259,9 @@ app.controller("fightCtrl", function($http, $scope){
 				name: response.data.name.charAt(0).toUpperCase() + response.data.name.substring(1),
 				num: response.data.id,
 				imageFront: response.data.sprites.front_default,
-				imageBack: response.data.sprites.back_default, 
-				health: 200
+				imageBack: response.data.sprites.back_default
 			}
+			$scope.message2 = "What will " + $scope.pokemon2.name + " do?";
 		}, function errorCallback(response) {
 			console.log(response.data);
 		  }); 
@@ -278,7 +278,7 @@ app.controller("fightCtrl", function($http, $scope){
 	$scope.mon2 = false;
 	$scope.run2 = false;
 
-	$scope.key = function($event){
+	/*$scope.key = function($event){
 		console.log($event.keyCode);
 		if ($event.keyCode == 38){
 			//up2(up arrow)
@@ -384,7 +384,320 @@ app.controller("fightCtrl", function($http, $scope){
 				position = 3;
 			}
 		}
+		else if ($event.keyCode == 32){
+			//space
+			if(position == 1){
+				$scope.beginFight = true;
+			}
+		}
+		else if ($event.keyCode == 13){
+			//enter
+			if(position2 == 1){
+				$scope.beginFight2 = true;
+			}
+		}
+	}*/
+	$scope.mon1MaxHp = 200;
+	$scope.mon2MaxHp = 200;
+	$scope.mon1CurrHp = 200;
+	$scope.mon2CurrHp = 200;
+	$scope.p1Selected = 1;
+	$scope.p2Selected = 1;
+	$scope.beginFight = false;
+	$scope.beginFight2 = false;
+	
+	$scope.key = function($event){
+		console.log($event.keyCode);
+		if ($event.keyCode == 38){
+			//up2(up arrow)
+			position2 = 2;
+		}
+		else if ($event.keyCode == 87){
+			//up1(w)
+			position = 2;
+		}
+		else if ($event.keyCode == 39){
+			//right2(right arrow)
+			position2 = 4;
+		}
+		else if ($event.keyCode == 68){
+			//right1 (d)
+			position = 4;
+		}
+		else if ($event.keyCode == 40){
+			//down1 (down arrow)
+			position2 = 3;
+		}
+		else if ($event.keyCode == 83){
+			//down1 (s)
+			position = 3;
+		}
+		else if ($event.keyCode == 37){
+			//left2 (left arrow)
+			position2 = 1;
+		}
+		else if ($event.keyCode == 65){
+			//left1 (a)
+			position = 1;
+		}
+		else if ($event.keyCode == 32){
+			//space
+			if($scope.beginFight2 == false){
+				$scope.beginFight = true;
+				$scope.p1Selected = position;
+			}
+			else if($scope.beginFight2 == true){
+				$scope.beginFight = true;
+				$scope.p1Selected = position;
+				console.log("P1 Selected: " + $scope.p1Selected);
+				console.log("P2 Selected: " + $scope.p2Selected);
+				if($scope.p1Selected == 1){
+					if($scope.p2Selected == 1){
+						$scope.mon1CurrHp -= 50;
+						$scope.mon2CurrHp -= 50;
+						$scope.message1 = "You stabbed each other (-50hp)";
+						$scope.message2 = "You stabbed each other (-50hp)";
+						console.log("stab vs stab");
+					}
+					else if($scope.p2Selected == 2){
+						$scope.mon2CurrHp += 50;
+						$scope.message1 = "Your opponent healed(+100hp), but you stabbed them(-50)";
+						$scope.message2 = "You healed(+100hp), but were stabbed(-50hp)"
+						console.log("stab vs heal");
+					}
+					else if($scope.p2Selected == 3){
+						$scope.message1 = "Your opponent perried your stab (-50hp)";
+						$scope.message2 = "You perried your opponents stab (-50hp)";
+						$scope.mon1CurrHp -= 50;
+						console.log("stab vs perry");
+					}
+					else if($scope.p2Selected == 4){
+						$scope.message1 = "You stabbed before your opponent could slam (-50hp)";
+						$scope.message2 = "Your opponent stabbed you before you could slam (-50hp)";
+						$scope.mon2CurrHp -= 50;
+						console.log("stab vs slam");
+					}
+				}
+				else if($scope.p1Selected == 2){
+					if($scope.p2Selected == 1){
+						$scope.message1 = "You healed(+100hp), but were stabbed(-50hp)";
+						$scope.message2 = "Your opponent healed(+100hp), but you stabbed them(-50)";
+						$scope.mon1CurrHp += 50;
+						console.log("heal vs stab");
+					}
+					else if($scope.p2Selected == 2){
+						$scope.message1 = "You healed(+100hp), your opponent healed(+100hp)";
+						$scope.message2 = "You healed(+100hp), your opponent healed(+100hp)";
+						$scope.mon1CurrHp += 100;
+						$scope.mon2CurrHp += 100;
+						console.log("heal vs heal");
+					}
+					else if($scope.p2Selected == 3){
+						$scope.message1 = "You healed(+100hp), your opponent perried nothing";
+						$scope.message2 = "You perried, but your opponent healed(+100hp)";
+						$scope.mon1CurrHp += 100;
+						console.log("heal vs perry");
+					}
+					else if($scope.p2Selected == 4){
+						$scope.message1 = "You healed(+100hp), and your opponent slammed(-100hp)";
+						$scope.message2 = "You slammed(-100hp), and your opponent healed(+100hp)";
+						console.log("heal vs slam");
+					}
+				}
+				else if($scope.p1Selected == 3){
+					if($scope.p2Selected == 1){
+						$scope.message1 = "You perried your opponents stab (-50hp)";
+						$scope.message2 = "Your opponent perried your stab (-50hp)";
+						$scope.mon2CurrHp -= 50;
+						console.log("perry vs stab");
+					}
+					else if($scope.p2Selected == 2){
+						$scope.message1 = "You perried, but your opponent healed(+100hp)";
+						$scope.message2 = "You healed(+100hp), your opponent perried nothing";
+						$scope.mon2CurrHp += 100;
+						console.log("perry vs heal");
+					}
+					else if($scope.p2Selected == 3){
+						$scope.message1 = "You perried, but your opponent perried too";
+						$scope.message2 = "You perried, but your opponent perried too";
+						console.log("perry vs perry");
+					}
+					else if($scope.p2Selected == 4){
+						$scope.message1 = "You perried but your opponent slammed(-100hp)";
+						$scope.message2 = "You slammed(-100hp), and your opponent tried to perry it";
+						$scope.mon1CurrHp -= 100;
+						console.log("perry vs slam");
+					}
+				}
+				else if($scope.p1Selected == 4){
+					if($scope.p2Selected == 1){
+						$scope.message1 = "Your opponent stabbed you before you could slam (-50hp)";
+						$scope.message2 = "You stabbed before your opponent could slam (-50hp)";
+						$scope.mon1CurrHp -= 50;
+						console.log("slam vs stab");
+					}
+					else if($scope.p2Selected == 2){
+						$scope.message1 = "You slammed(-100hp), and your opponent healed(+100hp)";
+						$scope.message2= "You healed(+100hp), and your opponent slammed(-100hp)";
+						console.log("slam vs heal");
+					}
+					else if($scope.p2Selected == 3){
+						$scope.message1 = "You slammed(-100hp), and your opponent tried to perry it";
+						$scope.message2 = "You perried but your opponent slammed(-100hp)";
+						$scope.mon2CurrHp -= 100;
+						console.log("slam vs perry");
+					}
+					else if($scope.p2Selected == 4){
+						$scope.message1 = "You slammed(-100hp) and your opponent slammed(-100hp)";
+						$scope.message2 = "You slammed(-100hp) and your opponent slammed(-100hp)";
+						$scope.mon1CurrHp -= 100;
+						$scope.mon2CurrHp -= 100;
+						console.log("slam vs slam");
+					}
+				}
+				if($scope.mon1CurrHp < 0)
+					$scope.mon1CurrHp = 0;
+				if($scope.mon1CurrHp > 200)
+					$scope.mon1CurrHp = 200;
+				if($scope.mon2CurrHp < 0)
+					$scope.mon2CurrHp = 0;
+				if($scope.mon2CurrHp > 200)
+					$scope.mon2CurrHp = 200;
+				$scope.beginFight = false;
+				$scope.beginFight2 = false;
+			}
+		}
+		else if ($event.keyCode == 13){
+			//enter
+			if($scope.beginFight == false){
+				$scope.beginFight2 = true;
+				$scope.p2Selected = position2;
+			}
+			else if($scope.beginFight == true){
+				$scope.beginFight2 = true;
+				$scope.p2Selected = position2;
+				console.log("P1 Selected: " + $scope.p1Selected);
+				console.log("P2 Selected: " + $scope.p2Selected);
+				if($scope.p1Selected == 1){
+					if($scope.p2Selected == 1){
+						$scope.mon1CurrHp -= 50;
+						$scope.mon2CurrHp -= 50;
+						$scope.message1 = "You stabbed each other (-50hp)";
+						$scope.message2 = "You stabbed each other (-50hp)";
+						console.log("stab vs stab");
+					}
+					else if($scope.p2Selected == 2){
+						$scope.mon2CurrHp += 50;
+						$scope.message1 = "Your opponent healed(+100hp), but you stabbed them(-50)";
+						$scope.message2 = "You healed(+100hp), but were stabbed(-50hp)"
+						console.log("stab vs heal");
+					}
+					else if($scope.p2Selected == 3){
+						$scope.message1 = "Your opponent perried your stab (-50hp)";
+						$scope.message2 = "You perried your opponents stab (-50hp)";
+						$scope.mon1CurrHp -= 50;
+						console.log("stab vs perry");
+					}
+					else if($scope.p2Selected == 4){
+						$scope.message1 = "You stabbed before your opponent could slam (-50hp)";
+						$scope.message2 = "Your opponent stabbed you before you could slam (-50hp)";
+						$scope.mon2CurrHp -= 50;
+						console.log("stab vs slam");
+					}
+				}
+				else if($scope.p1Selected == 2){
+					if($scope.p2Selected == 1){
+						$scope.message1 = "You healed(+100hp), but were stabbed(-50hp)";
+						$scope.message2 = "Your opponent healed(+100hp), but you stabbed them(-50)";
+						$scope.mon1CurrHp += 50;
+						console.log("heal vs stab");
+					}
+					else if($scope.p2Selected == 2){
+						$scope.message1 = "You healed(+100hp), your opponent healed(+100hp)";
+						$scope.message2 = "You healed(+100hp), your opponent healed(+100hp)";
+						$scope.mon1CurrHp += 100;
+						$scope.mon2CurrHp += 100;
+						console.log("heal vs heal");
+					}
+					else if($scope.p2Selected == 3){
+						$scope.message1 = "You healed(+100hp), your opponent perried nothing";
+						$scope.message2 = "You perried, but your opponent healed(+100hp)";
+						$scope.mon1CurrHp += 100;
+						console.log("heal vs perry");
+					}
+					else if($scope.p2Selected == 4){
+						$scope.message1 = "You healed(+100hp), and your opponent slammed(-100hp)";
+						$scope.message2 = "You slammed(-100hp), and your opponent healed(+100hp)";
+						console.log("heal vs slam");
+					}
+				}
+				else if($scope.p1Selected == 3){
+					if($scope.p2Selected == 1){
+						$scope.message1 = "You perried your opponents stab (-50hp)";
+						$scope.message2 = "Your opponent perried your stab (-50hp)";
+						$scope.mon2CurrHp -= 50;
+						console.log("perry vs stab");
+					}
+					else if($scope.p2Selected == 2){
+						$scope.message1 = "You perried, but your opponent healed(+100hp)";
+						$scope.message2 = "You healed(+100hp), your opponent perried nothing";
+						$scope.mon2CurrHp += 100;
+						console.log("perry vs heal");
+					}
+					else if($scope.p2Selected == 3){
+						$scope.message1 = "You perried, but your opponent perried too";
+						$scope.message2 = "You perried, but your opponent perried too";
+						console.log("perry vs perry");
+					}
+					else if($scope.p2Selected == 4){
+						$scope.message1 = "You perried but your opponent slammed(-100hp)";
+						$scope.message2 = "You slammed(-100hp), and your opponent tried to perry it";
+						$scope.mon1CurrHp -= 100;
+						console.log("perry vs slam");
+					}
+				}
+				else if($scope.p1Selected == 4){
+					if($scope.p2Selected == 1){
+						$scope.message1 = "Your opponent stabbed you before you could slam (-50hp)";
+						$scope.message2 = "You stabbed before your opponent could slam (-50hp)";
+						$scope.mon1CurrHp -= 50;
+						console.log("slam vs stab");
+					}
+					else if($scope.p2Selected == 2){
+						$scope.message1 = "You slammed(-100hp), and your opponent healed(+100hp)";
+						$scope.message2= "You healed(+100hp), and your opponent slammed(-100hp)";
+						console.log("slam vs heal");
+					}
+					else if($scope.p2Selected == 3){
+						$scope.message1 = "You slammed(-100hp), and your opponent tried to perry it";
+						$scope.message2 = "You perried but your opponent slammed(-100hp)";
+						$scope.mon2CurrHp -= 100;
+						console.log("slam vs perry");
+					}
+					else if($scope.p2Selected == 4){
+						$scope.message1 = "You slammed(-100hp) and your opponent slammed(-100hp)";
+						$scope.message2 = "You slammed(-100hp) and your opponent slammed(-100hp)";
+						$scope.mon1CurrHp -= 100;
+						$scope.mon2CurrHp -= 100;
+						console.log("slam vs slam");
+					}
+				}
+				if($scope.mon1CurrHp < 0)
+					$scope.mon1CurrHp = 0;
+				if($scope.mon1CurrHp > 200)
+					$scope.mon1CurrHp = 200;
+				if($scope.mon2CurrHp < 0)
+					$scope.mon2CurrHp = 0;
+				if($scope.mon2CurrHp > 200)
+					$scope.mon2CurrHp = 200;
+				$scope.beginFight = false;
+				$scope.beginFight2 = false;
+			}
+		}
 	}
+
+	
+	
 });
 
 
