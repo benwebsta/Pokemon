@@ -245,7 +245,8 @@ app.controller("fightCtrl", function($http, $scope){
 				name: response.data.name.charAt(0).toUpperCase() + response.data.name.substring(1),
 				num: response.data.id,
 				imageFront: response.data.sprites.front_default,
-				imageBack: response.data.sprites.back_default
+				imageBack: response.data.sprites.back_default,
+				health: 200
 			}
 		}, function errorCallback(response) {
 			console.log(response.data);
@@ -258,7 +259,8 @@ app.controller("fightCtrl", function($http, $scope){
 				name: response.data.name.charAt(0).toUpperCase() + response.data.name.substring(1),
 				num: response.data.id,
 				imageFront: response.data.sprites.front_default,
-				imageBack: response.data.sprites.back_default
+				imageBack: response.data.sprites.back_default, 
+				health: 200
 			}
 		}, function errorCallback(response) {
 			console.log(response.data);

@@ -51,7 +51,7 @@ li a{
 .subP2{
 	padding-left: 265px;
 }
-body{
+.fightBody{
 	background-color: gray;
 	overflow: hidden;
 }
@@ -65,7 +65,7 @@ body{
 	height: 150px;
 }
 #arena{
-	height: 500px;
+	height: 470px;
 	width: 700px;
     border: 2px solid gray;
     padding: 25px;
@@ -111,3 +111,49 @@ body{
 	font-weight: bold;
 	line-height: 50px;
 }
+#name2, #name1{
+	font-family: pokemon;
+	font-size: 150%;
+}
+.backMon{
+	width: 50%;
+}
+.hideBtn{
+	opacity: 0;
+	cursor: auto;
+}
+.hpBar{
+	height: 50px;
+	width: 220px;
+	border-bottom: 2px solid black;
+	border-right: 2px solid black;
+}
+.hp{
+	font-size: 75%;
+	font-weight: bold;
+}
+.hpNumber{
+	font-size: 150%;
+	text-align: center;
+}
+.healthMeter {
+	height: 7px;
+	width: 170px;
+	border: 1px solid black;
+	border-radius: 5px;
+	background-color: #000;
+	opacity: .65;
+}	
+progress::-webkit-progress-bar-value{
+    -webkit-appearance: progress-bar;
+	background-color: green;
+}	
+
+
+
+
+
+
+
+
+
