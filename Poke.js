@@ -69,8 +69,9 @@ app.controller("battleCtrl", function($scope, $http){
 	$scope.index1;
 	$scope.index2;
 	$scope.playerSelect = function(row, col){
-		window.scrollTo(0, 0);
+		//window.scrollTo(0, 0);
 		var pokeNum = parseInt(row*12) + parseInt(col);
+		pokeNum++;
 		var audio = new Audio('sounds/(' + pokeNum + ').wav');
 		console.log(audio);
 		audio.play();
