@@ -6,7 +6,7 @@ app.config(['$httpProvider', function ($httpProvider) {
 app.controller("pokedexCtrl", function($scope, $http){
 	$scope.listOfPokemon = new Array();
 	var num = 1;
-	while(num < 20){
+	while(num < 25){
 		$http({
 		  method: 'GET',
 		  url: 'http://pokeapi.co/api/v2/pokemon/' + num
@@ -70,6 +70,8 @@ app.controller("battleCtrl", function($scope, $http){
 	$scope.index2;
 	$scope.playerSelect = function(row, col){
 		window.scrollTo(0, 0);
+		var audio = new Audio('resources/pikachu.wav');
+		audio.play();
 		console.log("row param " + row);
 		console.log("col param " + col);
 		
