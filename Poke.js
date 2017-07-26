@@ -6,7 +6,7 @@ app.config(['$httpProvider', function ($httpProvider) {
 app.controller("pokedexCtrl", function($scope, $http){
 	$scope.listOfPokemon = new Array();
 	var num = 1;
-	while(num < 152){
+	while(num < 20){
 		$http({
 		  method: 'GET',
 		  url: 'http://pokeapi.co/api/v2/pokemon/' + num
@@ -15,8 +15,8 @@ app.controller("pokedexCtrl", function($scope, $http){
 				name: response.data.name.charAt(0).toUpperCase() + response.data.name.substring(1),
 				weight: response.data.weight,
 				num: response.data.id,
-				image: response.data.sprites.back_default,
-				sImage: response.data.sprites.front_shiny
+				image: response.data.sprites.front_default,
+				sImage: response.data.sprites.back_default
 			}
 			$scope.listOfPokemon.push($scope.pokemon);
 			$scope.listOfPokemon.sort(compareNumbers);
@@ -35,281 +35,25 @@ app.controller("pokedexCtrl", function($scope, $http){
 app.controller("homeCtrl", function($scope, $http){
 	
 });
-/*
+
 app.controller("battleCtrl", function($scope, $http){
-	$scope.listOfPokemon1 = new Array();
-	$scope.listOfPokemon2 = new Array();
-	$scope.listOfPokemon3 = new Array();
-	$scope.listOfPokemon4 = new Array();
-	$scope.listOfPokemon5 = new Array();
-	$scope.listOfPokemon6 = new Array();
-	$scope.listOfPokemon7 = new Array();
-	$scope.listOfPokemon8 = new Array();
-	$scope.listOfPokemon9 = new Array();
-	$scope.listOfPokemon10 = new Array();
-	$scope.listOfPokemon11= new Array();
-	$scope.listOfPokemon12 = new Array();
-	$scope.listOfPokemon13 = new Array();
-	
-	$scope.p1 = true;
-	$scope.p2 = true;
-	
+	$scope.listOfLists = new Array();
+
 	var num = 1;
-	while(num < 152){
-		$http({
-		  method: 'GET',
-		  url: 'http://pokeapi.co/api/v2/pokemon/' + num
-		}).then(function successCallback(response) {
-			$scope.pokemon = {
-				name: response.data.name.charAt(0).toUpperCase() + response.data.name.substring(1),
-				num: response.data.id,
-				image: response.data.sprites.front_default
-			}
-				if(response.data.id < 13){
-					console.log("adding 1-12");
-					$scope.listOfPokemon1.push($scope.pokemon);
-					$scope.listOfPokemon1.sort(compareNumbers);
-				}
-				else if(response.data.id > 12 && response.data.id < 25){
-					console.log("adding 13-24");
-					$scope.listOfPokemon2.push($scope.pokemon);
-					$scope.listOfPokemon2.sort(compareNumbers);
-				}
-				else if(response.data.id > 24 && response.data.id < 37){
-					console.log("adding 25-36");
-					$scope.listOfPokemon3.push($scope.pokemon);
-					$scope.listOfPokemon3.sort(compareNumbers);
-				}
-				else if(response.data.id > 36 && response.data.id < 49){
-					console.log("adding 37-48");
-					$scope.listOfPokemon4.push($scope.pokemon);
-					$scope.listOfPokemon4.sort(compareNumbers);
-				}
-				else if(response.data.id > 48 && response.data.id < 61){
-					console.log("adding 49-60");
-					$scope.listOfPokemon5.push($scope.pokemon);
-					$scope.listOfPokemon5.sort(compareNumbers);
-				}
-				else if(response.data.id > 60 && response.data.id < 73){
-					console.log("adding 61-72");
-					$scope.listOfPokemon6.push($scope.pokemon);
-					$scope.listOfPokemon6.sort(compareNumbers);
-				}
-				else if(response.data.id > 72 && response.data.id < 85){
-					console.log("adding 73-84");
-					$scope.listOfPokemon7.push($scope.pokemon);
-					$scope.listOfPokemon7.sort(compareNumbers);
-				}
-				else if(response.data.id > 84 && response.data.id < 97){
-					console.log("adding 85-96");
-					$scope.listOfPokemon8.push($scope.pokemon);
-					$scope.listOfPokemon8.sort(compareNumbers);
-				}
-				else if(response.data.id > 96 && response.data.id < 109){
-					console.log("adding 97-108");
-					$scope.listOfPokemon9.push($scope.pokemon);
-					$scope.listOfPokemon9.sort(compareNumbers);
-				}
-				else if(response.data.id > 108 && response.data.id < 121){
-					console.log("adding 109-120");
-					$scope.listOfPokemon10.push($scope.pokemon);
-					$scope.listOfPokemon10.sort(compareNumbers);
-				}
-				else if(response.data.id > 120 && response.data.id < 133){
-					console.log("adding 121-132");
-					$scope.listOfPokemon11.push($scope.pokemon);
-					$scope.listOfPokemon11.sort(compareNumbers);
-				}
-				else if(response.data.id > 132 && response.data.id < 145){
-					console.log("adding 133-144");
-					$scope.listOfPokemon12.push($scope.pokemon);
-					$scope.listOfPokemon12.sort(compareNumbers);
-				}
-				else if(response.data.id > 144 && response.data.id < 152){
-					console.log("adding 145-151");
-					$scope.listOfPokemon13.push($scope.pokemon);
-					$scope.listOfPokemon13.sort(compareNumbers);
-				}
-				else{
-					console.log("else");
-				}
-		  }, function errorCallback(response) {
-			console.log(response.data);
-		  });
-		  num++;
-	}	
-	
-	function compareNumbers(a, b){
-		return a.num - b.num;
-	}
-	
-	$scope.playerSelect = function(index){
-		var row = Math.floor((index+1)/12) + 1;
-		var col = (index)%12;
-		if(col == 11)
-			row--;
-		console.log(row + " " + col);
-		if($scope.p1 == true){
-			if(row == 1)
-				$scope.player1Pokemon = $scope.listOfPokemon1[col];
-			else if(row == 2)			
-				$scope.player1Pokemon = $scope.listOfPokemon2[col];
-			else if(row == 3)
-				$scope.player1Pokemon = $scope.listOfPokemon3[col];
-			else if(row == 4)
-				$scope.player1Pokemon = $scope.listOfPokemon4[col];
-			else if(row == 5)
-				$scope.player1Pokemon = $scope.listOfPokemon5[col];
-			else if(row == 6)
-				$scope.player1Pokemon = $scope.listOfPokemon6[col];
-			else if(row == 7)
-				$scope.player1Pokemon = $scope.listOfPokemon7[col];
-			else if(row == 8)
-				$scope.player1Pokemon = $scope.listOfPokemon8[col];
-			else if(row == 9)
-				$scope.player1Pokemon = $scope.listOfPokemon9[col];
-			else if(row == 10)
-				$scope.player1Pokemon = $scope.listOfPokemon10[col];
-			else if(row == 11)
-				$scope.player1Pokemon = $scope.listOfPokemon11[col];
-			else if(row == 12)
-				$scope.player1Pokemon = $scope.listOfPokemon12[col];
-			else if(row == 13)
-				$scope.player1Pokemon = $scope.listOfPokemon13[col];
-			console.log($scope.player1Pokemon);
-		}
-		else if($scope.p2 == true){
-			if(row == 1)
-				$scope.player2Pokemon = $scope.listOfPokemon1[col];
-			else if(row == 2)			
-				$scope.player2Pokemon = $scope.listOfPokemon2[col];
-			else if(row == 3)
-				$scope.player2Pokemon = $scope.listOfPokemon3[col];
-			else if(row == 4)
-				$scope.player2Pokemon = $scope.listOfPokemon4[col];
-			else if(row == 5)
-				$scope.player2Pokemon = $scope.listOfPokemon5[col];
-			else if(row == 6)
-				$scope.player2Pokemon = $scope.listOfPokemon6[col];
-			else if(row == 7)
-				$scope.player2Pokemon = $scope.listOfPokemon7[col];
-			else if(row == 8)
-				$scope.player2Pokemon = $scope.listOfPokemon8[col];
-			else if(row == 9)
-				$scope.player2Pokemon = $scope.listOfPokemon9[col];
-			else if(row == 10)
-				$scope.player2Pokemon = $scope.listOfPokemon10[col];
-			else if(row == 11)
-				$scope.player2Pokemon = $scope.listOfPokemon11[col];
-			else if(row == 12)
-				$scope.player2Pokemon = $scope.listOfPokemon12[col];
-			else if(row == 13)
-				$scope.player2Pokemon = $scope.listOfPokemon13[col];
-			console.log($scope.player2Pokemon);
-		}
-		
-	}
-	
-	$scope.lockIn1 = function(){
-		if($scope.player1Pokemon == null)
-			alert('Please Select a Pokemon!');
-		else if($scope.p1 == false)
-			alert('P2 is picking!');
-		else
-			$scope.p1 = false;
-	}
-	$scope.lockIn2 = function(){
-		if($scope.player2Pokemon == null)
-			alert('Please Select a Pokemon!');
-		else if($scope.p2 == false)
-			alert('P1 is picking!');
-		else{
-			angular.element(document.querySelector('#Fight').setAttribute
-			('href', 'Fight.html?p1' + $scope.player1Pokemon.num + 'p2' + $scope.player2Pokemon.num));
-			$scope.p2 = false;
-			console.log(angular.element(document.querySelector('#Fight')));
-		}
-	}
-});
-*/
-app.controller("battleCtrl", function($scope, $http){
-	$scope.listOfPokemon1 = new Array();
-	$scope.listOfPokemon2 = new Array();
-	$scope.listOfPokemon3 = new Array();
-	$scope.listOfPokemon4 = new Array();
-	$scope.listOfPokemon5 = new Array();
-	$scope.listOfPokemon6 = new Array();
-	$scope.listOfPokemon7 = new Array();
-	$scope.listOfPokemon8 = new Array();
-	$scope.listOfPokemon9 = new Array();
-	$scope.listOfPokemon10 = new Array();
-	$scope.listOfPokemon11= new Array();
-	$scope.listOfPokemon12 = new Array();
-	$scope.listOfPokemon13 = new Array();
-	
-	$scope.p1 = true;
-	$scope.p2 = true;
-	
-	var num = 1;
-	while(num < 152){
+	var listOfPokemon = new Array();
+	while(num < 722){
 			$scope.pokemon = {
 				name: "naaaa",
 				image: "resources/" + num + ".png"
 			}
-			if(num < 13){
-				console.log("adding 1-12");
-				$scope.listOfPokemon1.push($scope.pokemon);
-			}
-			else if(num > 12 && num < 25){
-				console.log("adding 13-24");
-				$scope.listOfPokemon2.push($scope.pokemon);
-			}
-			else if(num > 24 && num < 37){
-				console.log("adding 25-36");
-				$scope.listOfPokemon3.push($scope.pokemon);
-			}
-			else if(num > 36 && num < 49){
-				console.log("adding 37-48");
-				$scope.listOfPokemon4.push($scope.pokemon);
-			}
-			else if(num > 48 && num < 61){
-				console.log("adding 49-60");
-				$scope.listOfPokemon5.push($scope.pokemon);
-			}
-			else if(num > 60 && num < 73){
-				console.log("adding 61-72");
-				$scope.listOfPokemon6.push($scope.pokemon);
-			}
-			else if(num > 72 && num < 85){
-				console.log("adding 73-84");
-				$scope.listOfPokemon7.push($scope.pokemon);
-			}
-			else if(num > 84 && num < 97){
-				console.log("adding 85-96");
-				$scope.listOfPokemon8.push($scope.pokemon);
-			}
-			else if(num > 96 && num < 109){
-				console.log("adding 97-108");
-				$scope.listOfPokemon9.push($scope.pokemon);
-			}
-			else if(num > 108 && num < 121){
-				console.log("adding 109-120");
-				$scope.listOfPokemon10.push($scope.pokemon);
-			}
-			else if(num > 120 && num < 133){
-				console.log("adding 121-132");
-				$scope.listOfPokemon11.push($scope.pokemon);
-			}
-			else if(num > 132 && num < 145){
-				console.log("adding 133-144");
-				$scope.listOfPokemon12.push($scope.pokemon);
-			}
-			else if(num > 144 && num < 152){
-				console.log("adding 145-151");
-				$scope.listOfPokemon13.push($scope.pokemon);
-			}
-			else{
-				console.log("else");
+			if(num == 0)
+				listOfPokemon = new Array();
+			
+			listOfPokemon.push($scope.pokemon);
+			
+			if(num%12 == 0){
+				$scope.listOfLists.push(listOfPokemon);
+				listOfPokemon = new Array();
 			}
 		  num++;
 	}	
@@ -317,79 +61,28 @@ app.controller("battleCtrl", function($scope, $http){
 	function compareNumbers(a, b){
 		return a.num - b.num;
 	}
+		
+	$scope.p1 = true;
+	$scope.p2 = true;
+	
 	$scope.p1Picked = false;
 	$scope.index1;
 	$scope.index2;
-	$scope.playerSelect = function(index){
-		if($scope.p1Picked == false){
-			$scope.index1 = index;
-			console.log($scope.index1);
-		}
-		else{
-			$scope.index2 = index;
-			console.log($scope.index2);
-		}			
-		var row = Math.floor((index+1)/12) + 1;
-		var col = (index)%12;
-		if(col == 11)
-			row--;
-		console.log(row + " " + col);
+	$scope.playerSelect = function(row, col){
+		window.scrollTo(0, 0);
+		console.log("row param " + row);
+		console.log("col param " + col);
+		
 		if($scope.p1 == true){
-			if(row == 1)
-				$scope.player1Pokemon = $scope.listOfPokemon1[col];
-			else if(row == 2)			
-				$scope.player1Pokemon = $scope.listOfPokemon2[col];
-			else if(row == 3)
-				$scope.player1Pokemon = $scope.listOfPokemon3[col];
-			else if(row == 4)
-				$scope.player1Pokemon = $scope.listOfPokemon4[col];
-			else if(row == 5)
-				$scope.player1Pokemon = $scope.listOfPokemon5[col];
-			else if(row == 6)
-				$scope.player1Pokemon = $scope.listOfPokemon6[col];
-			else if(row == 7)
-				$scope.player1Pokemon = $scope.listOfPokemon7[col];
-			else if(row == 8)
-				$scope.player1Pokemon = $scope.listOfPokemon8[col];
-			else if(row == 9)
-				$scope.player1Pokemon = $scope.listOfPokemon9[col];
-			else if(row == 10)
-				$scope.player1Pokemon = $scope.listOfPokemon10[col];
-			else if(row == 11)
-				$scope.player1Pokemon = $scope.listOfPokemon11[col];
-			else if(row == 12)
-				$scope.player1Pokemon = $scope.listOfPokemon12[col];
-			else if(row == 13)
-				$scope.player1Pokemon = $scope.listOfPokemon13[col];
+			$scope.player1Pokemon = $scope.listOfLists[row][col];
+			$scope.row1 = row;
+			$scope.col1 = col;
 			console.log($scope.player1Pokemon);
 		}
 		else if($scope.p2 == true){
-			if(row == 1)
-				$scope.player2Pokemon = $scope.listOfPokemon1[col];
-			else if(row == 2)			
-				$scope.player2Pokemon = $scope.listOfPokemon2[col];
-			else if(row == 3)
-				$scope.player2Pokemon = $scope.listOfPokemon3[col];
-			else if(row == 4)
-				$scope.player2Pokemon = $scope.listOfPokemon4[col];
-			else if(row == 5)
-				$scope.player2Pokemon = $scope.listOfPokemon5[col];
-			else if(row == 6)
-				$scope.player2Pokemon = $scope.listOfPokemon6[col];
-			else if(row == 7)
-				$scope.player2Pokemon = $scope.listOfPokemon7[col];
-			else if(row == 8)
-				$scope.player2Pokemon = $scope.listOfPokemon8[col];
-			else if(row == 9)
-				$scope.player2Pokemon = $scope.listOfPokemon9[col];
-			else if(row == 10)
-				$scope.player2Pokemon = $scope.listOfPokemon10[col];
-			else if(row == 11)
-				$scope.player2Pokemon = $scope.listOfPokemon11[col];
-			else if(row == 12)
-				$scope.player2Pokemon = $scope.listOfPokemon12[col];
-			else if(row == 13)
-				$scope.player2Pokemon = $scope.listOfPokemon13[col];
+			$scope.player2Pokemon = $scope.listOfLists[row][col];
+			$scope.row2 = row;
+			$scope.col2 = col;
 			console.log($scope.player2Pokemon);
 		}
 		
@@ -413,7 +106,8 @@ app.controller("battleCtrl", function($scope, $http){
 			alert('P1 is picking!');
 		else{
 			angular.element(document.querySelector('#Fight').setAttribute
-			('href', 'Fight.html?p1' + $scope.index1 + 'p2' + $scope.index2));
+			('href', 'Fight.html?p1' + $scope.row1 + "/" + $scope.col1 + 'p2' + $scope.row2 + "/" + $scope.col2));
+			console.log($scope.col);
 			$scope.p2 = false;
 			console.log(angular.element(document.querySelector('#Fight')));
 		}
@@ -424,22 +118,34 @@ app.controller("fightCtrl", function($http, $scope){
 	var url = window.location.href;
 	var array = url.split('p1');
 	var array2 = array[1].split('p2');
+
 	var mon1 = array2[0];
+	var rowCol1 = mon1.split('/');
 	var mon2 = array2[1];
-	mon1++;
-	mon2++;
-	console.log(mon1 + " " + mon2);
+	var rowCol2 = mon2.split('/');
+	
+	var row1 = rowCol1[0];
+	var col1 = rowCol1[1];
+	var row2 = rowCol2[0];
+	var col2 = rowCol2[1];
+	col1++;
+	col2++;
+	
+	var num1 = parseInt(row1*12) + parseInt(col1);
+	var num2 = parseInt(row2*12) + parseInt(col2);
+	console.log(num1);
+	console.log(num2);
 	$scope.pokemon1 = {
 		name: "naaaaa",
-		imageFront: "resources/" + mon1 + ".png",
-		imageBack: "resources/" + mon1 + " (1).png"
+		imageFront: "resources/" + parseInt(num1, 10) + ".png",
+		imageBack: "resources/" + parseInt(num1, 10) + " (1).png"
 	}
 	$scope.message1 = "What will " + $scope.pokemon1.name + " do?";
 		
 	$scope.pokemon2 = {
 		name: "naa",
-		imageFront: "resources/" + mon2 + ".png",
-		imageBack: "resources/" + mon2 + " (1).png"
+		imageFront: "resources/" + parseInt(num2, 10) + ".png",
+		imageBack: "resources/" + parseInt(num2, 10) + " (1).png"
 	}
 	$scope.message2 = "What will " + $scope.pokemon2.name + " do?";
 	

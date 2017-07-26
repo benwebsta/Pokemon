@@ -65,76 +65,16 @@
 				</div>
 			</div>
 		</div>
-	
-	
-	
+		
 		<div id="selectionBox" ng-cloak>
-			<div class="row">
-				<div class="col-sm-1" ng-repeat="pokemon in listOfPokemon1" ng-click="playerSelect($index)">
+			<div class="row" ng-repeat="listOfPokemon in listOfLists" ng-init="rowIndex=$index">
+				<div id="columnNum" class="col-sm-1" ng-repeat="pokemon in listOfPokemon" ng-click="playerSelect(rowIndex, $index)">
 					<img src="{{pokemon.image}}">
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-sm-1" ng-repeat="pokemon2 in listOfPokemon2" ng-click="playerSelect($index+12)">
-					<img src={{pokemon2.image}}>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-1" ng-repeat="pokemon3 in listOfPokemon3" ng-click="playerSelect($index+24)">
-					<img src={{pokemon3.image}}>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-1" ng-repeat="pokemon4 in listOfPokemon4" ng-click="playerSelect($index+36)">
-					<img src={{pokemon4.image}}>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-1" ng-repeat="pokemon5 in listOfPokemon5" ng-click="playerSelect($index+48)">
-					<img src={{pokemon5.image}}>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-1" ng-repeat="pokemon6 in listOfPokemon6" ng-click="playerSelect($index+60)">
-					<img src={{pokemon6.image}}>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-1" ng-repeat="pokemon7 in listOfPokemon7" ng-click="playerSelect($index+72)">
-					<img src={{pokemon7.image}}>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-1" ng-repeat="pokemon8 in listOfPokemon8" ng-click="playerSelect($index+84)">
-					<img src={{pokemon8.image}}>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-1" ng-repeat="pokemon9 in listOfPokemon9" ng-click="playerSelect($index+96)">
-					<img src={{pokemon9.image}}>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-1" ng-repeat="pokemon10 in listOfPokemon10" ng-click="playerSelect($index+108)">
-					<img src={{pokemon10.image}}>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-1" ng-repeat="pokemon11 in listOfPokemon11" ng-click="playerSelect($index+120)">
-					<img src={{pokemon11.image}}>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-1" ng-repeat="pokemon12 in listOfPokemon12" ng-click="playerSelect($index+132)">
-					<img src={{pokemon12.image}}>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-1" ng-repeat="pokemon13 in listOfPokemon13" ng-click="playerSelect($index+144)">
-					<img src={{pokemon13.image}}>
-				</div>
-			</div>
 		</div>
+		
+		
 	
 	</div>
 	
