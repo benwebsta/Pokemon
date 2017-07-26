@@ -70,7 +70,9 @@ app.controller("battleCtrl", function($scope, $http){
 	$scope.index2;
 	$scope.playerSelect = function(row, col){
 		window.scrollTo(0, 0);
-		var audio = new Audio('resources/pikachu.wav');
+		var pokeNum = parseInt(row*12) + parseInt(col);
+		var audio = new Audio('sounds/(' + pokeNum + ').wav');
+		console.log(audio);
 		audio.play();
 		console.log("row param " + row);
 		console.log("col param " + col);
