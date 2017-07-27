@@ -46,10 +46,10 @@ li a{
   50% { opacity: 0; }
 }
 .subP1{
-	padding-left: 65px;
+	padding-left: 40px;
 }
 .subP2{
-	padding-left: 265px;
+	padding-left: 240px;
 }
 .fightBody{
 	background-color: gray;
@@ -153,6 +153,9 @@ progress::-webkit-progress-bar-value{
 	padding-left: 50px;
 	font-size: 200%;
 	color: white;
+}
+h2 {
+	text-align: left;
 }
 
 
