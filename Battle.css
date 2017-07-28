@@ -62,7 +62,17 @@ li a{
 }
 #fighter{
 	width: 150px;
-	height: 150px;
+	height: 150px;	
+}
+#fighter1_1{
+	position:relative;
+}
+#fighter1_2{
+	position:relative;
+}#fighter2_1{
+	position:relative;
+}#fighter2_2{
+	position:relative;
 }
 #arena{
 	height: 470px;
@@ -87,7 +97,7 @@ li a{
 	font-size: 125%;
 	font-weight: bold;
 	line-height: 130px;
-	padding-left: 20px
+	padding-left: 20px;
 }
 #moves{
 	height: 65px;
@@ -157,7 +167,34 @@ progress::-webkit-progress-bar-value{
 h2 {
 	text-align: left;
 }
-
+#mon2Weapon1, #mon1Weapon2{
+	position: absolute;
+	padding-left: 420px;
+	padding-top: 130px;
+	width: 50px;
+	height: 50px;
+}
+#mon1Weapon1, #mon2Weapon2{
+	position: absolute;
+	padding-left: 300px;
+	padding-top: 240px;
+	width: 50px;
+	height: 50px;
+}
+#mon2Blood1, #mon1Blood2{
+	position: absolute;
+	padding-left: 400px;
+	padding-top: 100px;
+	width: 50px;
+	height: 50px;
+}
+#mon1Blood1, #mon2Blood2{
+	position: absolute;
+	padding-left: 220px;
+	padding-top: 180px;
+	width: 50px;
+	height: 50px;
+}
 
 
 

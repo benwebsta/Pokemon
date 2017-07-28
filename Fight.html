@@ -27,11 +27,15 @@
 	  <li role="presentation"><a href="Pokedex.html">Pokedex</a></li>
 	  <li role="presentation" class="active"><a href="Battle.html">Battle</a></li>
 	</ul>
-	<h1>FIGHT!</h1>
+	<h1>FIGHT!</h1><button ng-click="move1()">move player1</button><button ng-click="move2()">move player2</button>
 	<h5>{{url}}</h5>
 	<div class="row">
 		<div class="col-md-6">
 			<div id="arena">
+			<div id="mon2Weapon1" ng-show="attack2"><img src={{weapon2}}></div>
+			<div id="mon1Weapon1" ng-show="attack1"><img src={{weapon1}}></div>
+			<div id="mon2Blood1" ng-show="blood2"><img src={{blood}}></div>
+			<div id="mon1Blood1" ng-show="blood1"><img src={{blood}}></div>
 				<div class="row">
 					<div class="col-md-2"></div>
 					<div class="col-md-2">
@@ -59,12 +63,12 @@
 					</div>
 					<div class="col-md-2"></div>
 					<div class="col-md-2"></div>
-					<div class="col-md-2"><img id="fighter" src={{pokemon2.imageFront}}></div>
+					<div id="fighter2_1" class="col-md-2"><img id="fighter" src={{pokemon2.imageFront}}></div>
 					<div class="col-md-2"></div>
 				</div>
 				<div class="row">
 					<div class="col-md-2"></div>
-					<div class="col-md-2"><img id="fighter" src={{pokemon1.imageBack}}></div>
+					<div id="fighter1_1" class="col-md-2"><img id="fighter" src={{pokemon1.imageBack}}></div>
 					<div class="col-md-2"></div>
 					<div class="col-md-2"></div>
 					<div class="col-md-2">
@@ -94,20 +98,6 @@
 				</div>
 				<div class="row">
 					<div id="leftMenu" class="col-md-6">{{message1}}</div>
-					<!--<div id="battleMenu" class="col-md-6">
-						<div class="row">
-							<div ng-show="fight" id="moves" class="col-md-6">&#x25B6; Fight</div>
-							<div ng-hide="fight" id="moves" class="col-md-6">Fight</div>
-							<div ng-show="bag" id="moves" class="col-md-6">&#x25B6; Bag</div>
-							<div ng-hide="bag" id="moves" class="col-md-6">Bag</div>
-						</div>
-						<div class="row">
-							<div ng-show="mon" id="moves" class="col-md-6">&#x25B6; Mons</div>
-							<div ng-hide="mon" id="moves" class="col-md-6">Mons</div>
-							<div ng-show="run" id="moves" class="col-md-6">&#x25B6; Run</div>
-							<div ng-hide="run" id="moves" class="col-md-6">Run</div>
-						</div>
-					</div>-->
 					<div id="battleMenu" class="col-md-6">
 						<div class="row">
 							<div id="moves" class="col-md-6">(a)Stab</div>
@@ -123,6 +113,10 @@
 		</div>
 		<div class="col-md-6">
 			<div id="arena">
+			<div id="mon1Weapon2" ng-show="attack1"><img src={{weapon1}}></div>
+			<div id="mon2Weapon2" ng-show="attack2"><img src={{weapon2}}></div>
+			<div id="mon1Blood2" ng-show="blood1"><img src={{blood}}></div>
+			<div id="mon2Blood2" ng-show="blood2"><img src={{blood}}></div>
 				<div class="row">
 					<div class="col-md-2"></div>
 					<div class="col-md-2">
@@ -150,12 +144,12 @@
 					</div>
 					<div class="col-md-2"></div>
 					<div class="col-md-2"></div>
-					<div class="col-md-2"><img id="fighter" src={{pokemon1.imageFront}}></div>
+					<div = id="fighter1_2" class="col-md-2"><img id="fighter" src={{pokemon1.imageFront}}></div>
 					<div class="col-md-2"></div>
 				</div>
 				<div class="row">
 					<div class="col-md-2"></div>
-					<div class="col-md-2"><img id="fighter" src={{pokemon2.imageBack}}></div>
+					<div id="fighter2_2" class="col-md-2"><img id="fighter" src={{pokemon2.imageBack}}></div>
 					<div class="col-md-2"></div>
 					<div class="col-md-2"></div>
 					<div class="col-md-2">
@@ -185,20 +179,6 @@
 				</div>
 				<div class="row">
 					<div id="leftMenu" class="col-md-6">{{message2}}</div>
-					<!--<div id="battleMenu" class="col-md-6">
-						<div class="row">
-							<div ng-show="fight2" id="moves" class="col-md-6">&#x25B6; Fight</div>
-							<div ng-hide="fight2" id="moves" class="col-md-6">Fight</div>
-							<div ng-show="bag2" id="moves" class="col-md-6">&#x25B6; Bag</div>
-							<div ng-hide="bag2" id="moves" class="col-md-6">Bag</div>
-						</div>
-						<div class="row">
-							<div ng-show="mon2" id="moves" class="col-md-6">&#x25B6; Mons</div>
-							<div ng-hide="mon2" id="moves" class="col-md-6">Mons</div>
-							<div ng-show="run2" id="moves" class="col-md-6">&#x25B6; Run</div>
-							<div ng-hide="run2" id="moves" class="col-md-6">Run</div>
-						</div>
-					</div>-->
 					<div id="battleMenu" class="col-md-6">
 						<div class="row">
 							<div id="moves" class="col-md-6">(&#8592;)Stab</div>

@@ -927,7 +927,116 @@ app.controller("battleCtrl", function($scope, $http, $rootScope){
 	}
 });
 
-app.controller("fightCtrl", function($http, $scope, $rootScope){
+app.controller("fightCtrl", function($http, $scope, $rootScope, $timeout){
+	$scope.blood="resources/blood.png";
+
+	var p1MoveDone = function(){
+		$scope.attack1 = false;
+	}
+	var p2MoveDone = function(){
+		$scope.attack2 = false;
+	}
+	var p1BloodDone = function(){
+		$scope.blood1 = false;
+	}
+	var p2BloodDone = function(){
+		$scope.blood2 = false;
+	}
+	function move1(attack){
+		$scope.weapon1 = "resources/" + attack + ".png";
+		console.log("in move1");
+		$scope.attack1 = true;
+		console.log($scope.attack1);
+		
+		var top1 = 130;
+		var left1 = 420;
+		var id1 = setInterval(frame1, 2.5);
+		function frame1() {
+			if (top1 == 215) {
+				clearInterval(id1);
+				$scope.blood2 = true;
+			} else {
+			top1++; 
+			if(left1 > 340)
+				left1--;
+			var pixTop1 = top1 + 'px';
+			var pixLeft1 = left1 + 'px';
+			angular.element('#mon1Weapon2').css('paddingTop', pixTop1);
+			angular.element('#mon1Weapon2').css('paddingLeft', pixLeft1);
+			//angular.element('#fighter1_2').css('paddingTop', pixTop1);
+			//angular.element('#fighter1_2').css('paddingLeft', pixLeft1);
+			}
+		}
+		var top2 = 240;
+		var left2 = 300;
+		var id2 = setInterval(frame2, 2.5);
+		function frame2() {
+			if (top2 == 155) {
+				clearInterval(id2);
+				$scope.blood2 = true;
+			} else {
+			top2--; 
+			if(left2 < 380)
+				left2++;
+			var pixTop2 = top2 + 'px';
+			var pixLeft2 = left2 + 'px';
+			angular.element('#mon1Weapon1').css('paddingTop', pixTop2);
+			angular.element('#mon1Weapon1').css('paddingLeft', pixLeft2);
+			//angular.element('#fighter1_1').css('paddingTop', pixTop1);
+			//angular.element('#fighter1_1').css('paddingLeft', pixLeft1);
+			}
+		}
+		$timeout(p1MoveDone, 500);
+		$timeout(p2BloodDone, 1000);
+	}
+	
+	function move2(attack){
+		$scope.weapon2 = "resources/" + attack + ".png";
+		console.log("in move2");
+		$scope.attack2 = true;
+		
+		var top1 = 130;
+		var left1 = 420;
+		var id1 = setInterval(frame1, 2.5);
+		function frame1() {
+			if (top1 == 215) {
+				clearInterval(id1);
+				$scope.blood1 = true;
+			} else {
+			top1++; 
+			if(left1 > 340)
+				left1--;
+			var pixTop1 = top1 + 'px';
+			var pixLeft1 = left1 + 'px';
+			angular.element('#mon2Weapon1').css('paddingTop', pixTop1);
+			angular.element('#mon2Weapon1').css('paddingLeft', pixLeft1);
+			//angular.element('#fighter2_1').css('paddingTop', pixTop1);
+			//angular.element('#fighter2_1').css('paddingLeft', pixLeft1);
+			}
+		}
+		var top2 = 240;
+		var left2 = 300;
+		var id2 = setInterval(frame2, 2.5);
+		function frame2() {
+			if (top2 == 155) {
+				clearInterval(id2);
+				$scope.blood1 = true;
+			} else {
+			top2--; 
+			if(left2 < 380)
+				left2++;
+			var pixTop2 = top2 + 'px';
+			var pixLeft2 = left2 + 'px';
+			angular.element('#mon2Weapon2').css('paddingTop', pixTop2);
+			angular.element('#mon2Weapon2').css('paddingLeft', pixLeft2);
+			//angular.element('#fighter2_2').css('paddingTop', pixTop1);
+			//angular.element('#fighter2_2').css('paddingLeft', pixLeft1);
+			}
+		}
+		$timeout(p2MoveDone, 500);
+		$timeout(p1BloodDone, 1000);
+	}
+	
 	var url = window.location.href;
 	var array = url.split('p1');
 	var array2 = array[1].split('p2');
@@ -1052,6 +1161,9 @@ app.controller("fightCtrl", function($http, $scope, $rootScope){
 						$scope.mon2CurrHp -= 50;
 						$scope.message1 = "You stabbed each other (-50hp)";
 						$scope.message2 = "You stabbed each other (-50hp)";
+						move1("sword");
+						setTimeout(p1MoveDone(), 4000);
+						move2("sword");
 						console.log("stab vs stab");
 					}
 					else if($scope.p2Selected == 2){
@@ -1179,6 +1291,8 @@ app.controller("fightCtrl", function($http, $scope, $rootScope){
 						$scope.mon2CurrHp -= 50;
 						$scope.message1 = "You stabbed each other (-50hp)";
 						$scope.message2 = "You stabbed each other (-50hp)";
+						move1("sword");
+						move2("sword");
 						console.log("stab vs stab");
 					}
 					else if($scope.p2Selected == 2){
