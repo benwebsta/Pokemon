@@ -1,5 +1,6 @@
 app.controller("fightCtrl", function($http, $scope, $rootScope, $timeout, $interval){
 	$scope.blood="resources/blood.png";
+	$scope.heal="resources/heal.png";
 	var wait1 = false;
 	var wait2 = false;
 	var p1MoveDone = function(){
@@ -13,6 +14,12 @@ app.controller("fightCtrl", function($http, $scope, $rootScope, $timeout, $inter
 	}
 	var p2BloodDone = function(){
 		$scope.blood2 = false;
+	}
+	var p1HealDone = function(){
+		$scope.heal1 = false;
+	}
+	var p2HealDone = function(){
+		$scope.heal2 = false;
 	}
 	function move1(attack){
 		$scope.weapon1 = "resources/" + attack + ".png";
@@ -28,6 +35,7 @@ app.controller("fightCtrl", function($http, $scope, $rootScope, $timeout, $inter
 			if (top1 == 215) {
 				clearInterval(id1);
 				$scope.blood2 = true;
+				wait1 = false;
 			} else {
 			top1++; 
 			if(left1 > 340)
@@ -47,6 +55,7 @@ app.controller("fightCtrl", function($http, $scope, $rootScope, $timeout, $inter
 			if (top2 == 155) {
 				clearInterval(id2);
 				$scope.blood2 = true;
+				wait1 = false;
 			} else {
 			top2--; 
 			if(left2 < 380)
@@ -76,6 +85,7 @@ app.controller("fightCtrl", function($http, $scope, $rootScope, $timeout, $inter
 			if (top1 == 215) {
 				clearInterval(id1);
 				$scope.blood1 = true;
+				wait2 = false;
 			} else {
 			top1++; 
 			if(left1 > 340)
@@ -95,6 +105,7 @@ app.controller("fightCtrl", function($http, $scope, $rootScope, $timeout, $inter
 			if (top2 == 155) {
 				clearInterval(id2);
 				$scope.blood1 = true;
+				wait2 = false;
 			} else {
 			top2--; 
 			if(left2 < 380)
@@ -118,10 +129,12 @@ app.controller("fightCtrl", function($http, $scope, $rootScope, $timeout, $inter
 			if(player == "player1"){
 				start = $scope.mon1CurrHp;
 				p1Dmg = true;
+				wait1 = true;
 			}
 			else if(player == "player2"){
 				start = $scope.mon2CurrHp;
 				p1Dmg = false;
+				wait2 = true;
 			}
 			var id = $interval(damage, 40);
 			function damage() {
@@ -151,11 +164,15 @@ app.controller("fightCtrl", function($http, $scope, $rootScope, $timeout, $inter
 			var start;
 			if(player == "player1"){
 				start = $scope.mon1CurrHp;
+				$scope.heal1 = true;
 				p1Dmg = true;
+				wait1 = true;
 			}
 			else if(player == "player2"){
 				start = $scope.mon2CurrHp;
+				$scope.heal2 = true;
 				p1Dmg = false;
+				wait2 = true;
 			}
 			var id = $interval(damage, 40);
 			function damage() {
@@ -314,6 +331,7 @@ app.controller("fightCtrl", function($http, $scope, $rootScope, $timeout, $inter
 							move1("sword");
 							healthDown("player2", 50, 1000);
 							healthUp("player2", 100, 4000);
+							$timeout(p2HealDone, 6000);
 							$scope.message1 = "Your opponent healed(+100hp), but you stabbed them(-50)";
 							$scope.message2 = "You healed(+100hp), but were stabbed(-50hp)"
 							console.log("stab vs heal");
@@ -321,13 +339,15 @@ app.controller("fightCtrl", function($http, $scope, $rootScope, $timeout, $inter
 						else if($scope.p2Selected == 3){
 							$scope.message1 = "Your opponent perried your stab (-50hp)";
 							$scope.message2 = "You perried your opponents stab (-50hp)";
-							$scope.mon1CurrHp -= 50;
+							healthDown("player1", 50, 1000);
+							//$scope.mon1CurrHp -= 50;
 							console.log("stab vs perry");
 						}
 						else if($scope.p2Selected == 4){
 							$scope.message1 = "You stabbed before your opponent could slam (-50hp)";
 							$scope.message2 = "Your opponent stabbed you before you could slam (-50hp)";
-							$scope.mon2CurrHp -= 50;
+							healthDown("player2", 50, 1000);
+							//$scope.mon2CurrHp -= 50;
 							console.log("stab vs slam");
 						}
 					}
@@ -338,6 +358,7 @@ app.controller("fightCtrl", function($http, $scope, $rootScope, $timeout, $inter
 							move2("sword");
 							healthDown("player1", 50, 1000);
 							healthUp("player1", 100, 4000);
+							$timeout(p1HealDone, 8000);
 							console.log("heal vs stab");
 						}
 						else if($scope.p2Selected == 2){
@@ -345,17 +366,23 @@ app.controller("fightCtrl", function($http, $scope, $rootScope, $timeout, $inter
 							$scope.message2 = "You both healed(+100hp)";
 							healthUp("player1", 100, 1000);
 							healthUp("player2", 100, 1000);
+							$timeout(p1HealDone, 5000);
+							$timeout(p2HealDone, 5000);
 							console.log("heal vs heal");
 						}
 						else if($scope.p2Selected == 3){
 							$scope.message1 = "You healed(+100hp), your opponent perried nothing";
 							$scope.message2 = "You perried, but your opponent healed(+100hp)";
-							$scope.mon1CurrHp += 100;
+							healthUp("player1", 100, 1000);
+							//$scope.mon1CurrHp += 100;
 							console.log("heal vs perry");
 						}
 						else if($scope.p2Selected == 4){
 							$scope.message1 = "You healed(+100hp), and your opponent slammed(-100hp)";
 							$scope.message2 = "You slammed(-100hp), and your opponent healed(+100hp)";
+							healthDown("player1", 100, 0);
+							healthUp("player1", 100, 5000);
+							$timeout(p1HealDone, 9000);
 							console.log("heal vs slam");
 						}
 					}
@@ -363,13 +390,15 @@ app.controller("fightCtrl", function($http, $scope, $rootScope, $timeout, $inter
 						if($scope.p2Selected == 1){
 							$scope.message1 = "You perried your opponents stab (-50hp)";
 							$scope.message2 = "Your opponent perried your stab (-50hp)";
-							$scope.mon2CurrHp -= 50;
+							healthDown("player2", 50, 1000);
+							//$scope.mon2CurrHp -= 50;
 							console.log("perry vs stab");
 						}
 						else if($scope.p2Selected == 2){
 							$scope.message1 = "You perried, but your opponent healed(+100hp)";
 							$scope.message2 = "You healed(+100hp), your opponent perried nothing";
-							$scope.mon2CurrHp += 100;
+							healthUp("player2", 100, 1000);
+							//$scope.mon2CurrHp += 100;
 							console.log("perry vs heal");
 						}
 						else if($scope.p2Selected == 3){
@@ -380,7 +409,8 @@ app.controller("fightCtrl", function($http, $scope, $rootScope, $timeout, $inter
 						else if($scope.p2Selected == 4){
 							$scope.message1 = "You perried but your opponent slammed(-100hp)";
 							$scope.message2 = "You slammed(-100hp), and your opponent tried to perry it";
-							$scope.mon1CurrHp -= 100;
+							healthDown("player1", 100, 1000);
+							//$scope.mon1CurrHp -= 100;
 							console.log("perry vs slam");
 						}
 					}
@@ -388,25 +418,32 @@ app.controller("fightCtrl", function($http, $scope, $rootScope, $timeout, $inter
 						if($scope.p2Selected == 1){
 							$scope.message1 = "Your opponent stabbed you before you could slam (-50hp)";
 							$scope.message2 = "You stabbed before your opponent could slam (-50hp)";
-							$scope.mon1CurrHp -= 50;
+							healthDown("player1", 50, 1000);
+							//$scope.mon1CurrHp -= 50;
 							console.log("slam vs stab");
 						}
 						else if($scope.p2Selected == 2){
 							$scope.message1 = "You slammed(-100hp), and your opponent healed(+100hp)";
 							$scope.message2= "You healed(+100hp), and your opponent slammed(-100hp)";
+							healthDown("player2", 100, 0);
+							healthUp("player2", 100, 5000);
+							$timeout(p2HealDone, 9000);
 							console.log("slam vs heal");
 						}
 						else if($scope.p2Selected == 3){
 							$scope.message1 = "You slammed(-100hp), and your opponent tried to perry it";
 							$scope.message2 = "You perried but your opponent slammed(-100hp)";
-							$scope.mon2CurrHp -= 100;
+							healthDown("player2", 100, 1000);
+							//$scope.mon2CurrHp -= 100;
 							console.log("slam vs perry");
 						}
 						else if($scope.p2Selected == 4){
 							$scope.message1 = "You slammed(-100hp) and your opponent slammed(-100hp)";
 							$scope.message2 = "You slammed(-100hp) and your opponent slammed(-100hp)";
-							$scope.mon1CurrHp -= 100;
-							$scope.mon2CurrHp -= 100;
+							healthDown("player1", 100, 1000);
+							healthDown("player2", 100, 1000);
+							//$scope.mon1CurrHp -= 100;
+							//$scope.mon2CurrHp -= 100;
 							console.log("slam vs slam");
 						}
 					}
@@ -447,6 +484,7 @@ app.controller("fightCtrl", function($http, $scope, $rootScope, $timeout, $inter
 							move1("sword");
 							healthDown("player2", 50, 1000);
 							healthUp("player2", 100, 4000);
+							$timeout(p2HealDone, 6000);
 							$scope.message1 = "Your opponent healed(+100hp), but you stabbed them(-50)";
 							$scope.message2 = "You healed(+100hp), but were stabbed(-50hp)"
 							console.log("stab vs heal");
@@ -454,13 +492,15 @@ app.controller("fightCtrl", function($http, $scope, $rootScope, $timeout, $inter
 						else if($scope.p2Selected == 3){
 							$scope.message1 = "Your opponent perried your stab (-50hp)";
 							$scope.message2 = "You perried your opponents stab (-50hp)";
-							$scope.mon1CurrHp -= 50;
+							healthDown("player1", 50, 1000);
+							//$scope.mon1CurrHp -= 50;
 							console.log("stab vs perry");
 						}
 						else if($scope.p2Selected == 4){
 							$scope.message1 = "You stabbed before your opponent could slam (-50hp)";
 							$scope.message2 = "Your opponent stabbed you before you could slam (-50hp)";
-							$scope.mon2CurrHp -= 50;
+							healthDown("player2", 50, 1000);
+							//$scope.mon2CurrHp -= 50;
 							console.log("stab vs slam");
 						}
 					}
@@ -471,6 +511,7 @@ app.controller("fightCtrl", function($http, $scope, $rootScope, $timeout, $inter
 							move2("sword");
 							healthDown("player1", 50, 1000);
 							healthUp("player1", 100, 4000);
+							$timeout(p1HealDone, 8000);
 							console.log("heal vs stab");
 						}
 						else if($scope.p2Selected == 2){
@@ -478,17 +519,23 @@ app.controller("fightCtrl", function($http, $scope, $rootScope, $timeout, $inter
 							$scope.message2 = "You both healed(+100hp)";
 							healthUp("player1", 100, 1000);
 							healthUp("player2", 100, 1000);
+							$timeout(p1HealDone, 5000);
+							$timeout(p2HealDone, 5000);
 							console.log("heal vs heal");
 						}
 						else if($scope.p2Selected == 3){
 							$scope.message1 = "You healed(+100hp), your opponent perried nothing";
 							$scope.message2 = "You perried, but your opponent healed(+100hp)";
-							$scope.mon1CurrHp += 100;
+							healthUp("player1", 100, 1000);
+							//$scope.mon1CurrHp += 100;
 							console.log("heal vs perry");
 						}
 						else if($scope.p2Selected == 4){
 							$scope.message1 = "You healed(+100hp), and your opponent slammed(-100hp)";
 							$scope.message2 = "You slammed(-100hp), and your opponent healed(+100hp)";
+							healthDown("player1", 100, 0);
+							healthUp("player1", 100, 5000);
+							$timeout(p1HealDone, 9000);
 							console.log("heal vs slam");
 						}
 					}
@@ -496,13 +543,15 @@ app.controller("fightCtrl", function($http, $scope, $rootScope, $timeout, $inter
 						if($scope.p2Selected == 1){
 							$scope.message1 = "You perried your opponents stab (-50hp)";
 							$scope.message2 = "Your opponent perried your stab (-50hp)";
-							$scope.mon2CurrHp -= 50;
+							healthDown("player2", 50, 1000);
+							//$scope.mon2CurrHp -= 50;
 							console.log("perry vs stab");
 						}
 						else if($scope.p2Selected == 2){
 							$scope.message1 = "You perried, but your opponent healed(+100hp)";
 							$scope.message2 = "You healed(+100hp), your opponent perried nothing";
-							$scope.mon2CurrHp += 100;
+							healthUp("player2", 100, 1000);
+							//$scope.mon2CurrHp += 100;
 							console.log("perry vs heal");
 						}
 						else if($scope.p2Selected == 3){
@@ -513,7 +562,8 @@ app.controller("fightCtrl", function($http, $scope, $rootScope, $timeout, $inter
 						else if($scope.p2Selected == 4){
 							$scope.message1 = "You perried but your opponent slammed(-100hp)";
 							$scope.message2 = "You slammed(-100hp), and your opponent tried to perry it";
-							$scope.mon1CurrHp -= 100;
+							healthDown("player1", 100, 1000);
+							//$scope.mon1CurrHp -= 100;
 							console.log("perry vs slam");
 						}
 					}
@@ -521,25 +571,32 @@ app.controller("fightCtrl", function($http, $scope, $rootScope, $timeout, $inter
 						if($scope.p2Selected == 1){
 							$scope.message1 = "Your opponent stabbed you before you could slam (-50hp)";
 							$scope.message2 = "You stabbed before your opponent could slam (-50hp)";
-							$scope.mon1CurrHp -= 50;
+							healthDown("player1", 50, 1000);
+							//$scope.mon1CurrHp -= 50;
 							console.log("slam vs stab");
 						}
 						else if($scope.p2Selected == 2){
 							$scope.message1 = "You slammed(-100hp), and your opponent healed(+100hp)";
 							$scope.message2= "You healed(+100hp), and your opponent slammed(-100hp)";
+							healthDown("player2", 100, 0);
+							healthUp("player2", 100, 5000);
+							$timeout(p2HealDone, 9000);
 							console.log("slam vs heal");
 						}
 						else if($scope.p2Selected == 3){
 							$scope.message1 = "You slammed(-100hp), and your opponent tried to perry it";
 							$scope.message2 = "You perried but your opponent slammed(-100hp)";
-							$scope.mon2CurrHp -= 100;
+							healthDown("player2", 100, 1000);
+							//$scope.mon2CurrHp -= 100;
 							console.log("slam vs perry");
 						}
 						else if($scope.p2Selected == 4){
 							$scope.message1 = "You slammed(-100hp) and your opponent slammed(-100hp)";
 							$scope.message2 = "You slammed(-100hp) and your opponent slammed(-100hp)";
-							$scope.mon1CurrHp -= 100;
-							$scope.mon2CurrHp -= 100;
+							healthDown("player1", 100, 1000);
+							healthDown("player2", 100, 1000);
+							//$scope.mon1CurrHp -= 100;
+							//$scope.mon2CurrHp -= 100;
 							console.log("slam vs slam");
 						}
 					}
